@@ -1,6 +1,14 @@
-import { getProducts } from "@/lib/data";
+import { getProducts, getCollections } from "@/lib/data";
 import ProductGrid from "@/components/products/ProductGrid";
 import FilterBar from "@/components/products/FilterBar";
+
+export function generateStaticParams() {
+  const collections = getCollections();
+  return [
+    { slug: "all" },
+    ...collections.map((c) => ({ slug: c.slug })),
+  ];
+}
 
 interface CollectionPageProps {
   params: { slug: string };

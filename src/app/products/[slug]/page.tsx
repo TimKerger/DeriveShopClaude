@@ -1,8 +1,13 @@
 import { notFound } from "next/navigation";
-import { getProductBySlug, getRelatedProducts } from "@/lib/data";
+import { getProductBySlug, getRelatedProducts, getProducts } from "@/lib/data";
 import ProductImageGallery from "@/components/products/ProductImageGallery";
 import ProductInfo from "@/components/products/ProductInfo";
 import ProductRecommendations from "@/components/products/ProductRecommendations";
+
+export function generateStaticParams() {
+  const { products } = getProducts({});
+  return products.map((p) => ({ slug: p.slug }));
+}
 
 interface ProductPageProps {
   params: { slug: string };
